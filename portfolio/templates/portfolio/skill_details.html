@@ -1,0 +1,130 @@
+{% extends 'portfolio/base.html' %}
+{% block content %}
+<script>
+    $(document).ready(function () {
+        // Initialise les tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+<style>
+    .tooltip {
+        font-size: 14px;
+        max-width: 200px;
+    }
+
+    .category-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .subcategory-title {
+        font-size: 18px;
+        margin-bottom: 5px;
+        color: #666;
+    }
+
+    .skill-card {
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        border: 1px solid #dee2e6;
+        position: relative;
+    }
+
+    .skill-card .card-title {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .skill-card .card-text {
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    .description-container {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .description-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .description-text {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .btn-projects {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container">
+    <h2 class="text-center mb-4">Détails de la compétence : {{ skill.name }}</h2>
+    <div class="row mt-4">
+        <div class="col-md-8 mx-auto">
+            <div class="subcategory-title">Sous-catégories :</div>
+            <div class="row">
+                {% for subcategory in skill.subcategories.all %}
+                <div class="col-md-6">
+                    <div class="skill-card card" data-toggle="tooltip" data-placement="top"
+                        title="{{ subcategory.description }}">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a
+                                    href="{% url 'portfolio:subcategory_details' subcategory.category.id subcategory.id %}">
+                                    {{ subcategory.name }}</a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8 mx-auto">
+            <div class="subcategory-title">Catégories liées :</div>
+            <div class="row">
+                {% for category in categories.all %}
+                <div class="col-md-6">
+                    <div class="skill-card card" data-toggle="tooltip" data-placement="top"
+                        title="{{ category.description }}">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'portfolio:category_skills' category.pk %}">{{ category.name }}</a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="description-container">
+        <div class="description-title">Description :</div>
+        <div class="description-text">{{ skill.description }}</div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'portfolio:skill_projects' skill.pk %}" class="btn btn-primary btn-projects">Voir les projets
+            liés à cette compétence</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
+<style>
+    .project-details {
+        padding: 40px;
+    }
+
+    .project-image {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .project-image img {
+        width: auto;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        max-width: 50%;
+    }
+
+    .project-title {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .subtitle {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        font-size: 18px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+
+    .categories {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .categories span {
+        background-color: #f8f9fa;
+        color: #333;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+
+    @media (max-width: 767px) {
+        .project-image img {
+            width: 80%;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="project-details">
+                <div class="project-image">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid">
+                </div>
+                <h2 class="project-title">{{ project.title }}</h2>
+
+                <div class="categories">
+                    Categories:
+                    {% for category in categories %}
+                    <span>{{ category.name }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="categories">
+                    Sous-categories:
+                    {% for subcategory in subcategories %}
+                    <span>{{ subcategory.name }}</span>
+                    {% endfor %}
+                </div>
+                <div class="categories">
+                    Compétences associées:
+                    {% for skill in skills %}
+                    <span>{{ skill.name }}</span>
+                    {% endfor %}
+                </div>
+
+                {% for subtitle, description in subtitles|zip_lists:descriptions %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="subtitle">{{ subtitle }}</h3>
+                        <p class="description">{{ description|urlize|linebreaksbr }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

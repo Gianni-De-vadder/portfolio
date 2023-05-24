@@ -1,0 +1,104 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="{% static 'portfolio/profile_photo.jpg' %}" alt="Photo de profil" class="profile-photo">
+            </div>
+            <div class="col-md-6">
+                <h1>Bienvenue sur mon portfolio</h1>
+                <p>Je m'appelle Gianni De Vadder et je suis un développeur Python.</p>
+                <p>Ici, vous trouverez une sélection de mes projets récents et mes compétences.</p>
+                <a href="{% url 'portfolio:projects' %}" class="btn btn-primary btn-lg">Voir mes projets</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about">
+    <div class="container">
+        <h2>À propos de moi</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{% static 'portfolio/about_photo.jpg' %}" alt="Photo à propos" class="about-photo">
+            </div>
+            <div class="col-md-6">
+                <p>Je suis un professionnel passionné de l'informatique, avec une solide expérience dans le
+                    développement,
+                    l'administration système et le réseau. Ma curiosité naturelle et ma soif de connaissances me
+                    poussent
+                    constamment à explorer de nouvelles technologies et à relever de nouveaux défis. Mon parcours
+                    professionnel
+                    m'a permis de développer des compétences approfondies dans ces domaines, tout en cultivant une
+                    approche
+                    proactive et axée sur les solutions. Je suis un individu polyvalent, capable de m'adapter rapidement
+                    aux
+                    environnements changeants et de trouver des solutions efficaces. Je suis motivé par l'amélioration
+                    continue,
+                    la résolution de problèmes complexes et la recherche de l'excellence technique.</p>
+                <a href="{% url 'portfolio:about' %}" class="btn btn-secondary btn-lg">En savoir plus</a>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    /* Ajout de styles personnalisés pour home.html */
+    .hero {
+        padding: 100px 0;
+        background-color: #f8f8f8;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .about {
+        padding: 100px 0;
+        background-color: #fff;
+    }
+
+    .about h2 {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .about p {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .about-photo {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .btn-lg {
+        font-size: 18px;
+        padding: 12px 30px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-lg:hover {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .profile-photo {
+        max-width: 100%;
+        height: auto;
+        max-height: 400px;
+        /* Taille maximale de la photo */
+    }
+</style>
+{% endblock %}
